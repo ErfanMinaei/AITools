@@ -1,184 +1,123 @@
-# Directory Snapshot Generator
+# AI Tools
 
-A lightweight Python script that scans any directory you specify and generates a single `allFiles.txt` file containing:
-
-- The scanned directory path
-- A tree view of the directory structure
-- The contents of every readable text file
-- Binary files are automatically detected and skipped
-
-The generated `allFiles.txt` is saved **in the directory where the script is executed**, regardless of which directory is scanned.
-
----
+A collection of lightweight Python utilities for working with AI-assisted development. The project currently includes tools for generating project documentation and fetching README files directly from GitHub repositories.
 
 ## Features
 
-- ✅ Scan any directory on your computer
-- ✅ Interactive path prompt
-- ✅ Generates a directory tree
-- ✅ Includes contents of all readable text files
-- ✅ Skips common development folders
-- ✅ Detects binary files automatically
-- ✅ No external dependencies
+- 📂 Generate a complete snapshot of any project directory
+- 🌳 Export the directory tree
+- 📄 Include the contents of all readable text files
+- 🚫 Automatically skip binary files
+- ⚙️ Exclude common development directories (`.git`, `venv`, `node_modules`, etc.)
+- 📥 Fetch README files from multiple GitHub repositories
+- 🔍 Automatically detect common default branches (`main`, `master`, `develop`)
+- 📝 Save generated documentation to a single output file
+- 🚀 No configuration required
 
----
+## Tools
 
-## Excluded Directories
+### Documentor
 
-The following directories are skipped by default:
+Scans any directory and generates a `documents.txt` file containing:
 
-- `.git`
-- `venv`
-- `env`
-- `__pycache__`
-- `node_modules`
-- `.pytest_cache`
-- `.mypy_cache`
-- `.tox`
-- `.eggs`
-- `dist`
-- `build`
+- Project directory path
+- Directory tree
+- Contents of every readable text file
+- Binary file detection
 
-You can customize this list by editing the `EXCLUDE_DIRS` set near the top of the script.
+### README Fetcher
 
----
+Downloads the `README.md` file from one or more GitHub repositories and combines them into a single `readme.txt` file.
+
+Supports:
+
+- Repository URLs
+- `owner/repository` format
+- Automatic branch detection
+
+## Tech Stack
+
+- Python 3
+- Requests
+
+## Installation
+
+```bash
+git clone <your-repository-url>
+cd AITools
+
+pip install requests
+```
 
 ## Usage
 
-Run the script:
+### Generate Project Documentation
 
 ```bash
-python generator.py
+python documentor.py
 ```
 
-You'll be prompted to enter the directory to scan:
+Enter the directory you want to scan when prompted.
+
+Output:
 
 ```
-Enter the directory to scan:
-```
-
-Examples:
-
-Windows
-
-```
-C:\Users\John\Projects\MyProject
-```
-
-Linux / macOS
-
-```
-/home/john/projects/myproject
+documents.txt
 ```
 
 ---
 
-## Output
+### Fetch GitHub READMEs
 
-After scanning, an `allFiles.txt` file will be created **in the same directory where you ran the script**.
-
-For example:
-
-```
-generator.py
-README.md
-allFiles.txt
+```bash
+python readmesfetcher.py
 ```
 
-The scanned project itself is **not modified**.
-
----
-
-## Output Format
-
-The generated file contains:
-
-### 1. Root directory
+Enter one or more repository URLs:
 
 ```
-Main directory:
-/path/to/project
+https://github.com/user/project
+https://github.com/another/repository
 ```
 
-### 2. Directory tree
+Output:
 
 ```
-├── src
-│   ├── app.py
-│   └── utils.py
+readme.txt
+```
+
+## Project Structure
+
+```
+.
+├── documentor.py
+├── readmesfetcher.py
+├── documents.txt
+├── allFiles.txt
 ├── README.md
-└── requirements.txt
+└── .gitignore
 ```
-
-### 3. File contents
-
-```
-Full path of file:
-/path/to/project/src/app.py
-
-<contents of app.py>
-
-Full path of file:
-/path/to/project/README.md
-
-<contents of README.md>
-```
-
----
-
-## Binary Files
-
-Binary files (images, videos, executables, compiled libraries, etc.) are not included.
-
-Instead, the output will contain:
-
-```
-[Binary file – content not shown]
-```
-
----
-
-## Optional Customization
-
-### Exclude additional directories
-
-Modify the `EXCLUDE_DIRS` set.
-
-### Exclude file extensions
-
-Uncomment and edit:
-
-```python
-EXCLUDE_EXTENSIONS = {
-    ".pyc",
-    ".dll",
-    ".exe",
-}
-```
-
-Then uncomment the extension check inside the file processing loop.
-
----
 
 ## Requirements
 
 - Python 3.7+
-- No third-party packages required
+- requests
 
----
+Install dependencies:
 
-## Use Cases
+```bash
+pip install requests
+```
 
-This tool is useful for:
+## Future Improvements
 
-- Sharing an entire project with ChatGPT or another AI assistant
-- Creating project snapshots
-- Documenting project structure
-- Reviewing large codebases
-- Preparing repositories for AI analysis
-
----
+- Export documentation as Markdown or PDF
+- Support additional Git providers (GitLab, Bitbucket)
+- Recursive README collection
+- CLI arguments instead of interactive prompts
+- Custom exclude/include patterns
+- Parallel README downloads
 
 ## License
 
-MIT License
+This project is licensed under the MIT License.

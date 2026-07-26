@@ -81,7 +81,7 @@ def main():
     target_dir = get_directory()
 
     # Output is always created where the script is executed
-    output_file = os.path.join(os.getcwd(), "allFiles.txt")
+    output_file = os.path.join(os.getcwd(), "documents.txt")
 
     with open(output_file, "w", encoding="utf-8") as out:
         out.write(f"Main directory: {target_dir}\n\n")
